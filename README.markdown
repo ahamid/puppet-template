@@ -7,8 +7,10 @@ This is a simple project that encapsulates the default setup for Puppet I have u
 
 This project contains a set of scripts to bootstrap a new RedHat/CentOS machine (whether in a service like Linode or EC2, or a new physical server) into the Git/Puppet setup.
 
-* `bootstrap-machine.sh` - this is the first script to run on the machine.  It installs EPEL, git and puppet, optionally sets a hostname and sets a root SSH key (and randomizes the root password), and starts up a puppet job that polls for the initial puppet run.  This script can be run either manually, or as part of a Linode boot Stackscript or EC2 equivalent.
-* `init-puppet-node.sh/init-puppet.pp` - run this to get the rest of the git/puppet machinery in place
+* `files/bin/bootstrap-machine.sh` - this is the first script to run on the machine.  It installs EPEL, git and puppet, optionally sets a hostname and sets a root SSH key (and randomizes the root password), and starts up a puppet job that polls for the initial puppet run.  This script can be run either manually, or as part of a Linode boot Stackscript or EC2 equivalent.
+* `files/bin/init-puppet-node.sh/init-puppet.pp` - run this to get the rest of the git/puppet machinery in place
+
+On the target machine your ssh public key is installed into the `root` and `git` users, a git repo is installed in `/var/git/puppet` and a cron job is installed that runs puppet (initially every minute, and then every 5 mins after bootstrapping) to poll for changes.  A post-receive hook is installed in the git repo which copies the repo contents to `/etc/puppet` where they will get picked up by the puppet cron job.  Once in place you just `git push` your changes to the node.  You can use git's multi-url feature to set up a remote that pushes to all nodes at once.
 
 The typical workflow is:
 
