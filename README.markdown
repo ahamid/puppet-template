@@ -14,7 +14,9 @@ The typical workflow is:
 
 1. Provision/install new machine
 1. On the target machine arrange to run `bootstrap-machine.sh`.  Either define `FQDN` and `ROOT_PUB_KEY` manually, or configure them however you configure the script to run at boot (e.g. Linode has an interface to define the fields).
+
     `FQDN=machine1.mydomain.com ./bootstrap-machine.sh`
+
 1. On your desktop, `run init-puppet-node.sh`.  Either configure your name ahead of time, or define the `MACHINE_NAME` env var if you can only access it externally via IP.
    This script will:
    1. SSH into the target machine and perform an initial Puppet run to complete bootstrapping
