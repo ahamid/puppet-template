@@ -3,7 +3,7 @@ Puppet Template
 
 This is a simple project that encapsulates the default setup for Puppet I have used on a couple of projects.  The approach is derived (take directly) from Bitfield Consulting's "Scaling Puppet with Git" article:
 
-http://bitfieldconsulting.com/scaling-puppet-with-distributed-version-control
+[Bitfield Consulting - Scaling Puppet with Distributed Version Control]: http://bitfieldconsulting.com/scaling-puppet-with-distributed-version-control
 
 This project contains a set of scripts to bootstrap a new RedHat/CentOS machine (whether in a service like Linode or EC2, or a new physical server) into the Git/Puppet setup.
 
