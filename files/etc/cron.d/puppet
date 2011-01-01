@@ -1,0 +1,1 @@
+*/5 * * * * root /etc/puppet/files/bin/puppet-client.sh --logdest syslog > /dev/null 2>&1

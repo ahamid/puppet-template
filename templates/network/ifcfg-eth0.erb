@@ -1,0 +1,9 @@
+DEVICE=eth0
+BOOTPROTO=none
+ONBOOT=yes
+
+# ipaddress comes from the facter fact for the currently configured ip address
+IPADDR=<%= ipaddress %>
+NETMASK=255.255.255.0
+# gateway is manually specified in the node definition 
+GATEWAY=<%= gateway %>

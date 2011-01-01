@@ -1,0 +1,5 @@
+#!/bin/sh
+# Replaces /etc/puppet content with checked out repo content
+rm -rf /etc/puppet/*
+git archive --format=tar HEAD | (cd /etc/puppet && tar xf -)
+

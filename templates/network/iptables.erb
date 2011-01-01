@@ -1,0 +1,36 @@
+# This is a fairly vanilla CentOS-supplied iptables config.
+# We have added a LOGDROP chain that logs dropped packets in an obvious fashion
+# and have also installed throttling on ssh connections.
+# This is an erb template so you can do some simple special casing here without
+# having to blow up your puppet config.
+#
+# Firewall configuration written by system-config-securitylevel
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:RH-Firewall-1-INPUT - [0:0]
+-N LOGDROP
+-A LOGDROP -j LOG --log-prefix '**DROPPED**' --log-level 4
+-A LOGDROP -j DROP
+-A INPUT -j RH-Firewall-1-INPUT
+-A FORWARD -j RH-Firewall-1-INPUT
+-A RH-Firewall-1-INPUT -i lo -j ACCEPT
+-A RH-Firewall-1-INPUT -p icmp --icmp-type any -j ACCEPT
+-A RH-Firewall-1-INPUT -p 50 -j ACCEPT
+-A RH-Firewall-1-INPUT -p 51 -j ACCEPT
+-A RH-Firewall-1-INPUT -p udp --dport 5353 -d 224.0.0.251 -j ACCEPT
+-A RH-Firewall-1-INPUT -p udp -m udp --dport 631 -j ACCEPT
+-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 631 -j ACCEPT
+-A RH-Firewall-1-INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# I advise changing your default ssh port
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+# Only accept 4 ssh conns/second
+#-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -m recent --set --name ssh --rsource
+#-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -m recent ! --rcheck --seconds 60 --hitcount 4 --name ssh --rsource -j ACCEPT
+<% if false # hostname == "special case" -%>
+some special case config here
+<% end -%>
+-A RH-Firewall-1-INPUT -j REJECT --reject-with icmp-host-prohibited
+COMMIT
