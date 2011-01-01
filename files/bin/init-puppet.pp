@@ -45,7 +45,7 @@ file {
     require => [Package['puppet'], User['git']];
 }
 
-# comfort us that the right authorized key is making it through to our precious precious root acct
+# print out the key that was smuggled into puppet...
 notice "Using SSH public key from environment: $ssh_pub_key\n"
 
 # don't work so gud
