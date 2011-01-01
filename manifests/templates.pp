@@ -235,7 +235,7 @@ class logwatch {
 }
 
 # installs an aliases file
-# ass as files/etc/aliases
+# add in files/etc/aliases
 class mail-aliases {
   file {'/etc/aliases':
     owner  => root,
