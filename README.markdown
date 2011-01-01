@@ -23,8 +23,7 @@ The typical workflow is:
    This script will:
    1. SSH into the target machine and perform an initial Puppet run to complete bootstrapping
    1. Reset your git remote based on the machine name to handle the case where your puppet config has changed the ssh port (making git now inaccessible).
-   1. Perform your initial git push to to replace a couple of bootstrapped trampoline files with the real puppet-managed source
-   You will be prompted at each step.
+   1. Perform your initial git push to to replace a couple of bootstrapped trampoline files with the real puppet-managed source. You will be prompted at each step.
 
     `./files/bin/init-puppet-node.sh machine1.mydomain.com`
 
