@@ -22,7 +22,7 @@ The typical workflow is:
    1. Perform your initial git push to to replace a couple of bootstrapped trampoline files with the real puppet-managed source
    You will be prompted at each step.
 
-    `./init-puppet-node.sh machine1.mydomain.com
+    `./init-puppet-node.sh machine1.mydomain.com`
 
 From there you can continue on to customize your puppet config.  You can also subsequently bootstrap additional machines this way.  You can manually add additional remotes for each new target to your local repo and push to all of them.
 
